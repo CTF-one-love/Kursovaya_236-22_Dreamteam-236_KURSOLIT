@@ -1,0 +1,191 @@
+{% extends 'accounts/main.html' %}
+
+
+{% block content %}
+
+<style>
+    /* homepage css */
+    #overview1{
+        width: 100%;
+        background-image: url(/static/images/bghome1.jpg) ;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-y: center;
+        display: flex;
+        justify-content: center;
+        align-items: top;
+        height: 80vh;
+    }
+
+    .welcome{
+        text-align: center;
+        margin-top: 30px;
+        color:rgba(8, 6, 6, 0.493) ;
+        font-size: 4em;
+        font-family: 'Abel', sans-serif;
+    }
+
+    .authors{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .authorimg{
+        border-radius:200px;
+        height: 250px;
+        width: 250px;
+        border: 5px solid rgb(122, 83, 83);
+    }
+
+    .authorname{
+    position: relative;
+    color:rgba(8, 6, 6, 0.493);
+    font-weight: 500;
+    font-size: 1.25em;
+    text-align: center;
+    }
+
+    #overview3{
+        margin-top: 100px;
+        background-image:url(/static/images/bghome2.jpg) ;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-y: center;
+        display: flex;
+        position: relative;
+        align-items: center ;
+        height: 55vh;
+    }
+    .info{
+        display: flex;
+        width: 26%;
+        margin-left: 30px;
+        font-size: 1.7em;
+        color: #c3c1bf;
+        position:relative ;
+         text-align: left;
+    }
+
+    .iconimg{
+        border: 4px solid blue;
+        padding: 5px;
+        border-radius: 50px;
+        height:100px;
+        width: 100px;
+    }
+    .searchbox{
+        display: flex;
+        justify-content: center;
+    }
+
+    .select2-selection__rendered{
+        font-size: x-large;
+    }
+
+</style>
+
+<div class="introcontainer" id="overview1">
+
+    <div class="welcome" >
+
+        <div class="searchbox">
+
+            <form class="search d-flex " action="{% url 'booksearch' %}" method="GET">
+                {% csrf_token %}
+
+                <select id="name" style="width:550px; " class="name" name="name"></select>
+
+                <button class="btn btn-sm btn-outline-secondary  mx-1" type="submit">Поиск</button>
+
+            </form>
+        </div>
+
+        <b >
+            ДОБРО ПОЖАЛОВАТЬ В МИР КНИГ!
+        </b>
+    </div>
+</div>
+<div class="introcontainer" id="overview2">
+    <div id="authorcontainer">
+        <div class="welcome">
+            <p  >Читайте книги от лучших Авторов</p>
+        </div>
+        <div class="authors">
+            <div class="authorimgcontainer">
+
+                <img class="authorimg" src="/static/images/author1.jpg" alt="" srcset="">
+                <span class="authorname"> <p class="autorname">J.K. Rowling</p></span>
+            </div>
+            <div class="authorimgcontainer">
+
+                <img class="authorimg" src="/static/images/author2.jpg" alt="" srcset="">
+                <span class="authorname"><p class="autorname">Agatha Christie</p></span>
+
+                </div>
+                <div class="authorimgcontainer">
+
+                    <img class="authorimg" src="/static/images/author3.jpg" alt="" srcset="">
+                    <span class="authorname"><p class="autorname">Steven King</p></span>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div id="overview3" class="introcontainer">
+        <div class="info welcome " >
+            Начинайте читать книги и познавать мир благодаря уникальному опыту вместе с KURSOLIT.
+            Kursolit предоставляет лучшие книги для вас в любое удобное время. Читайте Бестселлеры у себя дома благодаря сервису Kursolit.
+        </div>
+    </div>
+    <div id="overview4" class="introcontainer">
+        <div class="authors" style="margin: 100px;">
+            <div class="authorimgcontainer">
+
+                <img class="iconimg" src="/static/images/book.png" alt="" srcset="">
+                <span class="authorname">Удобный заказ книг </span>
+            </div>
+            <div class="authorimgcontainer">
+
+                <img class="iconimg" src="/static/images/customer.png" alt="" srcset="">
+                <span class="authorname">Клиентская Поддержка 24 X 7</span>
+
+            </div>
+            <div class="authorimgcontainer">
+
+                <img class="iconimg" src="/static/images/terms.png" alt="" srcset="">
+                <span class="authorname">Политика конфиденциальности</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('.name').select2({
+            ajax: {
+                url:" {% url 'booksuggestions' %}",
+                dataType: 'json',
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            console.log(item.name)
+                            return { text: item.name,id: item.id};
+                        })
+                    };
+                }
+            },
+            minimumInputLength: 1
+        });
+    });
+
+</script>
+
+{% endblock %}

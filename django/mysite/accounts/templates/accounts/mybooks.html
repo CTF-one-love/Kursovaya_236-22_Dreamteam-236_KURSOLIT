@@ -1,0 +1,61 @@
+{% extends 'accounts/main.html' %} {% block content %}
+<style>
+  body{
+    height: 70vh;
+  }
+</style>
+<br>
+<br><br>
+
+<div>
+    <h5 style="text-align: center;">Добавленные книги</h5>
+    <div style="height:73vh;justify-content: center; align-items:top; display: flex; width: 70%;">
+      <div class="row">
+        <div class="col-md">
+          <div class="card card-body" style="width: 200%;">
+            <table class="table  tabble-stripped table-sm" >
+              <thead class="table-dark">
+              <tr >
+
+
+                <th style="text-align:center;">Книга</th>
+
+                <th  style="text-align: center;">Дата добавления</th>
+                <th   style="text-align:center;"></th>
+
+              </tr>
+            </thead>
+            <tbody  class="table-info">
+
+              {% for i in orders %}
+              <tr>
+
+                <td style="text-align:center;">{{i.book.name}}</td>
+
+                <td style="text-align: center;"> {{i.dateordered}}</td>
+                <td style="text-align:center;" >   <a
+                  class="btn btn-primary justify sm"
+                  href="{% url 'addreview' i.book.id  %}"
+                  role="button"
+                  >Добавить отзыв</a
+                  >
+                </td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+            </table>
+            <footer>
+
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+<style>
+  body{
+    margin-bottom: -85px;
+  }
+</style>

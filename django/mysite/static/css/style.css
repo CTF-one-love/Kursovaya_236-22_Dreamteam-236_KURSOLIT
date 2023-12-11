@@ -1,0 +1,72 @@
+*{
+    box-sizing: border-box;
+}
+
+#login {
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 307px;
+    top: 30%;
+    left: 40%;
+    right: 40%;
+}
+.login{
+
+display: flex;
+
+background-image: url('/static/images/logpage.jpeg');
+}
+
+.url{
+    color: red;
+}
+.logintext{
+    color: rgb(66, 112, 93);
+}
+
+#issue{
+    color: rgb(14, 138, 70);
+
+    border: 1px solid rgb(14, 138, 70);
+}
+#issue:hover{
+    background-color: rgb(14, 138, 70);
+    color: white;
+    cursor: pointer;
+}
+#details{
+    color: rgb(49, 43, 43);
+    background-color: white;
+    border: 1px solid black;
+
+}
+
+#details:hover{
+    background-color: rgb(49, 43, 43);
+    color: white;
+    cursor: pointer;
+}
+#wishlist{
+    border:1px solid black;
+    cursor: pointer;
+}
+#wishlist:hover{
+    color: white;
+    background-color: black;
+}
+.issueform{
+    display:none
+}
+.themebtn{
+    border:1px solid #c3c1bf;
+  }
+.themebtn:hover{
+    border:1px solid #c3c1bf;
+    background-color: #c3c1bf;
+    color: white;
+  }
+
+#testfont{
+    font-family: cursive;
+    color: rgb(73, 212, 155);
+}

@@ -1,0 +1,170 @@
+{% extends 'accounts/main.html' %} {% block content %}
+
+<style>
+  .themebtn{
+    border:1px solid #c3c1bf;
+  }
+  .themebtn:hover{
+    border:1px solid #c3c1bf;
+    background-color: #c3c1bf;
+    color: white;
+  }
+</style>
+
+<br />
+
+<div class="row">
+  <div class="col-md">
+    <div class="card card-body">
+      <h5>Книги</h5>
+    </div>
+    <div class="card card-body">
+
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn btn-primary mb-2"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal1"
+      >
+        Добавить книги
+      </button>
+
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal1"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel1">Добавить книги</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <div class="modal-body">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{form.name.label}}
+                    {{form.name}}
+                    <br>
+                    {{form.category.label}}
+                    {{form.category}}
+                    <br>
+                    {{form.author.label}}
+                    {{form.author}}
+                    <br>
+                    {{form.description.label}}
+                    {{form.description}}
+                    <br>
+                    {{form.language.label}}
+                    {{form.language}}
+                    <br>
+                    {{form.quantity.label}}
+                    {{form.quantity}}
+                    <br>
+                    {{form.image.label}}
+                    {{form.image}}
+
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                   <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+          <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+ Добавить категорию
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Добавить категорию</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{categoryform.name.label}}
+            {{categoryform.name}}
+
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+           <button type="submit" class="btn">Сохранить</button>
+        </form>
+
+    </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+      <table class="table">
+        <tr>
+          <th>Книги</th>
+
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+
+        {% for i in books %}
+        <tr>
+          <td>{{i.name}}</td>
+
+          <td><a href="{% url 'updatebook' i.id %}" role="button" class="btn themebtn me-2">Изменить книгу</a></td>
+
+
+
+
+            <td>
+              <a
+                class="btn btn-outline-danger me-2"
+                href="{% url 'deletebook' i.id %}"
+                role="button"
+                >Удалить</a
+              >
+            </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

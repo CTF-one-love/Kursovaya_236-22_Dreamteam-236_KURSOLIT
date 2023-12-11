@@ -1,0 +1,36 @@
+{% extends 'accounts/main.html' %} {% block content %}
+<br>
+<br><br>
+
+<h5 style="text-align: center;">Запрошенные книги</h5>
+<div style="height:55 vh;justify-content: center; align-items:top; display: flex; width: 70%;">
+    <div class="row">
+      <div class="col-md">
+        <div class="card card-body" style="width: 380%;">
+          <table class="table table-sm">
+            <thead class="table-dark">
+              <tr>
+                <th width="10%" style="text-align:center;">Книга</th>
+                <th width="10%"  style="text-align:center;"></th>
+              </tr>
+            </thead>
+              <tbody  class="table-info">
+              {% for i in orders %}
+              <tr>
+
+                <td style="text-align:center;">{{i.book.name}}</td>
+
+
+                <td style="text-align:center;">  <a href="{% url 'delwish' i.id %}" class="btn btn-outline-danger">Отмена</a></td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+  {% include 'accounts/footer.html' %}

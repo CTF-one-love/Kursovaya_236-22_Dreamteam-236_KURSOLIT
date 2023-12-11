@@ -1,0 +1,82 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200&display=swap" rel="stylesheet">
+
+<style>
+  .logintext{
+    color: blanchedalmond;
+    font-family: 'Mulish', sans-serif;
+  }
+  body{
+
+  display: flex;
+  background: url('/static/images/logpage.jpeg');
+  backdrop-filter:blur(1.0px);
+  justify-content:center;
+  align-items: center;
+}
+
+#login {
+  background: #080e12b0;
+  /* border: 2px solid rgb(22, 101, 175); */
+  margin: 50px;
+  padding: 50px;
+  /* position: absolute;
+  justify-content: center;
+  align-items:center ; */
+}
+.btn{
+
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  background: #080e12b0;
+  border: 2px solid white;
+  width: 100%;
+}
+.btn:hover{
+  background-color: white;
+  color: black;
+  width: 100%;
+
+  padding: 10px;
+
+}
+.input{
+  width: 100%;
+  padding: 10px;
+  color: white;
+  background: #36495594;
+  border: 2px solid white;
+}
+.url{
+  color: aquamarine;
+}
+</style>
+  <body>
+    <div
+    class="login" >
+
+      <form id="login" method="POST" action="/login/">
+        <h2 class="logintext" style="text-align: center;">ВХОД</h2>
+        <br >
+        {% csrf_token %}
+
+        <input name="username" type="text" placeholder="username" class="input" />
+        <br >
+        <br>
+
+        <input type="password" placeholder="password" name="password" class="input"/>
+        <br >
+        <br >
+        <button type="submit" class="btn ">Вход</button>
+        <br >
+        <br >
+        {% for message in messages %}
+        <p class="logintext" id="messages">{{message}}</p>
+        {% endfor %}
+        <p class="logintext">У вас нет аккаунта? <a class="url"href="{% url 'register' %}">Зарегистрируйтесь</a></p>
+      </form>
+
+  </div>
+</body>

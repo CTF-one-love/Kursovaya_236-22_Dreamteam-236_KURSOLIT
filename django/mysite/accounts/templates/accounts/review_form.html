@@ -1,0 +1,80 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body{
+        background: url('/static/images/reviewbackground.jpg') no-repeat center center/cover;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .reviewform{
+        width:100%;
+        justify-self: center;
+        align-items: center;
+    }
+
+    .review{
+        background-color: rgba(134, 49, 49, 0.651);
+        width: 25%;
+        padding: 1em;
+        position: absolute;
+        top: 20%;
+        left: 39%;
+        display: flex;
+        flex-direction:column;
+
+
+    }
+    #btn{
+        background-color: rgba(134, 49, 49, 0.651);
+        border: 2px solid wheat;
+        color: wheat;
+    }
+    #btn:hover{
+        background-color: wheat;
+        color:  rgba(134, 49, 49, 0.651);
+        border:2px solid wheat;
+
+
+    }
+    select{
+
+        background-color: rgba(233, 206, 221, 0.603);
+    }
+    textarea{
+        background-color: rgba(233, 206, 221, 0.603);
+    }
+</style>
+
+<br>
+    <div class="reviewform">
+        <form class="review" action="{% url 'addreview' book.id  %}" method="POST">
+            <h4 style="text-align:center; color: wheat; ">Отзыв о книге "{{book.name}}" </h4>
+            <br>
+            {% csrf_token %}
+            <div style="display: none;">
+                {{form.user.label}}
+                {{form.user}}
+                <br>
+                <br>
+                {{form.book.label}}
+                {{form.book}}
+                <br>
+                <br>
+            </div>
+            {{form.Review.label}}
+            <br>
+            {{form.Review}}
+            <br>
+            <button id="btn" type="submit" class="btn btn-primary ">Отправить</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

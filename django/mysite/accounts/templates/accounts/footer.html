@@ -1,0 +1,126 @@
+
+<div id="footer">
+
+    <footer class="footer">
+        <div class="copyright">
+            <p class="sectionTitle title">KURSOLIT</p>
+            Создано <strong>DreamTeam236Б-22</strong><br>
+            Все права принадлежат данной компании.
+        </div>
+        <div class="container1">
+            <a href="{% url 'home' %}" id="home">Домой</a><br>
+            <a href="{% url 'browse' %}" id="booksearch">Поиск</a><br>
+            <p class="SectionTitle" style="color:white;">О нас</p>
+            <div class="section">Kursolit - это простой и удобный способ бронировать книги, делится своим мнением с другими читателями! А также читать книги в любом удобном для вас месет.</div>
+        </div>
+        <div class="container2">
+
+            <div class="SectionTitle" style="color:white;">Поддержка</div>
+            <div class="section">
+                <form action="{% url 'savequery' %}" method="POST">
+                    {% csrf_token %}
+                    <input style="width:100%;" type="email" name="emailid" placeholder="Введи свой email" id=""><br><br>
+                    <div class="mb-3">
+                        <textarea class="form-control" name="query" placeholder="Введи свой вопрос здесь" id="query"
+                            rows="2"></textarea>
+                    </div>
+                    <input type="submit" value="Отправить" class="btn btn-outline-secondary sm">
+                </form>
+            </div>
+
+
+        </div>
+
+    </footer>
+</div>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Alegreya+Sans:300);
+
+html {
+position: relative;
+}
+
+body {
+/* нижнее поле по высоте панели */
+<!--margin-bottom: 300px;-->
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+width: 100%;
+}
+
+.footer {
+position: absolute;
+bottom: 0;
+display: flex;
+width: 100%;
+background-color: black;
+color: rgb(173, 169, 169);
+font-family: 'Alegreya Sans', sans-serif;
+
+/* установка высоты нижней панели */
+height: 200px;
+align-items: center;
+justify-content: center;
+}
+
+.title {
+font-size: x-large;
+font-weight: 500;
+}
+
+.copyright {
+margin-left: 25px;
+padding-right: 150px;
+list-style: none;
+position: absolute;
+left: 3%;
+}
+
+.sectionTitle {
+margin-bottom: 10px;
+color: white;
+}
+
+.container1 {
+display: flex;
+flex-direction: column;
+width: 600px;
+margin-right: 10%;
+margin-left: 10%;
+justify-content: center;
+
+}
+
+#home {
+text-decoration: none;
+color: white;
+font-weight: 100;
+}
+
+#home:hover {
+color: rgb(173, 169, 169);
+
+}
+#booksearch {
+text-decoration: none;
+color: white;
+font-weight: 100;
+}
+
+#booksearch:hover {
+color: rgb(173, 169, 169);
+
+}
+.container2{
+display: flex;
+flex-direction: column;
+margin-right: 25px;
+padding-left: 150px;
+position: absolute;
+right: 3%;
+}
+</style>

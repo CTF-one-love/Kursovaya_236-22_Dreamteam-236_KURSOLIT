@@ -1,0 +1,171 @@
+{% extends 'accounts/main.html' %} {% load static %} {% block content %}
+
+<div class="row mt-3">
+  <div class="col-2 border">
+    <div id="bookfilter">
+      <form action="{% url 'filterbook' %}" method="GET">
+        {% csrf_token %}
+
+        <div id="categorycontainer">
+          <ul style="list-style: none">
+            <h5>Категории</h5>
+
+            {% for category in category %}
+            <li>
+              <label for="{{category.name}}">{{category.name}}</label>
+              <input
+                type="checkbox"
+                id="{{category.name}}"
+                name="category[]"
+                value="{{category.name}}"
+              />
+            </li>
+
+            {% endfor %}
+          </ul>
+        </div>
+        <div id="languagecontainer">
+          <ul class="filter" style="list-style: none">
+            <h5>Языки</h5>
+            {% for language in languages %}
+            <li>
+              <label for="{{language.name}}">{{language.name}}</label>
+              <input
+                type="checkbox"
+                id="{{language.name}}"
+                name="language[]"
+                value="{{language.name}}"
+              />
+            </li>
+
+            {% endfor %}
+          </ul>
+        </div>
+        <div id="availabilty">
+          <ul class="filter" style="list-style: none">
+            <h5>В наличии</h5>
+            <li>
+              <label for="available">Только в наличии</label>
+              <input
+                type="checkbox"
+                name="available"
+                id="available"
+                value="available"
+              />
+            </li>
+          </ul>
+        </div>
+        <div id="likedbooks">
+          <ul class="filter" style="list-style: none">
+            <h5>Книги с рейтингом</h5>
+            <li>
+              <label for="upvotedbooks">Книги с положительным рейтингом</label>
+              <input
+                type="checkbox"
+                name="upvotedbooks"
+                id="upvotedbooks"
+                value="upvoted"
+              />
+            </li>
+          </ul>
+        </div>
+        <input
+          type="submit"
+          role="btn"
+          class="btn themebtn mb-2"
+          style="margin-left: 30px"
+          value="Применить фильтр"
+          id="filterbtn"
+        />
+      </form>
+    </div>
+  </div>
+
+  <br /><br /><br />
+  {% comment %}
+  <div style="justify-content: center; align-items: center; display: flex">
+    {% if bn %} {% for book in bn %}
+    <b> You searched for "{{book.name}} "</b>
+    {% endfor %} {% elif bc %}
+
+    <b>You searched for "{{category}} "</b>
+    {% else %}
+    <b style="font-size: 25px">No results matched</b>
+    {%endif%}
+  </div>
+  {% endcomment %}
+  <br />
+  <div class="col-10 border">
+    <div class="filtertags mt-4 mb-4">
+      {% for filter in filters %} {% if filter is not None %}
+      <span class="badge rounded-pill bg-secondary">{{filter}}</span>
+
+      {% endif %} {% endfor %} {% if filters is not None %}
+      <a
+        class="btn btn-sm btn-outline-secondary"
+        href="{% url 'browse' %}"
+        role="button"
+        >Очистить все фильтры</a
+      >
+      {% endif %}
+    </div>
+
+    <div class="card-group">
+      <div class="row ">
+        {% for i in books %}
+
+        <div class="col mx-2 mb-3">
+          <div class="card card-container" style="width: 280px">
+            <img
+              src="{{i.image.url}} "
+              style="height: 300px"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <a href="{% url 'bookdetail' i.id %} " class="booklink text-center"
+                ><h5 class="card-title">{{i.name}}</h5></a
+              >
+              <p class="card-text text-center">{{i.author}}</p>
+              {% if i.quantity %}
+              <p class="card-text text-center" style="color: green">В НАЛИЧИИ</p>
+              {% else %}
+              <p class="card-text text-center" style="color: red">НЕДОСТУПНА</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .booklink {
+    text-decoration: none;
+  }
+  .booklink:hover{
+    color: rgb(77, 37, 37);
+  }
+
+  .card:hover {
+    box-shadow: 2px 2px 2px 1px grey;
+  }
+  .filter {
+    list-style: none;
+  }
+  .card-container:hover{
+    background-color: #c3c1bf96
+  }
+
+  .themebtn {
+    border: 2px solid #c3c1bf;
+  }
+  .themebtn:hover {
+    border: 2px solid #c3c1bf;
+    background-color: #c3c1bf;
+    color: white;
+  }
+</style>
+{% endblock %}
